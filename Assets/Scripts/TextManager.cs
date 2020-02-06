@@ -82,6 +82,7 @@ public class TextManager : MonoBehaviour
         DialogueConfig speaker = speakersDic[speakerName];
         string addColor = TagsUtility.AddColorTag(text, speaker.speaker_color);
         storyText.text += addColor;
+        storyText.font = speaker.font;
         storyText.fontSize = textSize;
 
         for (int i = 0; i < text.Length; i++)
@@ -124,6 +125,7 @@ public class TextManager : MonoBehaviour
 
             TMPro.TextMeshProUGUI buttonCurrentText = button.GetComponent<TMPro.TextMeshProUGUI>();
             buttonCurrentText.fontSize = choiceSize;
+            buttonCurrentText.font = choices.font;
             buttonCurrentText.text = AddSpaces(choice.text);
             buttonCurrentText.maxVisibleCharacters = 0;
             button.transform.localScale = new Vector3(1, 1, 1);

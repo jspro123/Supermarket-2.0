@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: Assembly-CSharp::DiagloueConfig
   speaker_name: Default
+  font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   time_between_sentences: 0.25
   time_between_characters: 0.05
   speaker_color:
