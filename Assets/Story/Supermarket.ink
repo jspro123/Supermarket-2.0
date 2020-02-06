@@ -11,13 +11,13 @@ VAR examined_lamp = false
 == Introduction ==  
 
 A low, piercing ring fills the room. The sound wakes you up, annoyed and tired. #Sound/Amber
-You reach for your phone, the source of your disturbance, but before you can open it, the sound stops and the notification vanishes. You stare blankly at the screen for a bit before turning it on. 23:30. Hm. Now's as good of a time as any. You rub your eyes and stretch before getting up. #continue
+You reach for your phone, the source of your disturbance, but before you can open it, the sound stops and the notification vanishes. You stare blankly at the screen for a bit before turning it on. 23:30. Hm. Now's as good of a time as any. You rub your eyes and stretch before getting up. #continue #Kill/Amber
 
 * [Click here to continue...]
     -> Grocery_List_Hunting
     
 == Grocery_List_Hunting ==
-This apartment has seen better days and better renters. It stands quite bare, save for a few necessities; TV, fridge, a bed, and a desk are all that's there. You're not the cleanest, either; stains are splattered all across the carpet. And the smell - was it always this bad? You look around, searching for your grocery list.
+This apartment has seen better days and better renters. It stands quite bare, save for a few necessities; TV, fridge, a bed, and a desk are all that's there. You're not the cleanest, either; stains are splattered all across the carpet. And the smell - was it always this bad? You look around, searching for your grocery list. #Sound/Home
 -> Options
 
 = Options 
@@ -111,7 +111,7 @@ You look at the list: bleach, cheese, pasta, some meat - right, you're running o
 
 == Crowded_Street == 
 
-On your way there, you spot a crowd gathering around a broken lamppost in the distance. It's too dark for you to see what they're doing or hear what they're saying, but you can make out the sounds of someone crying. 
+On your way there, you spot a crowd gathering around a broken lamppost in the distance. It's too dark for you to see what they're doing or hear what they're saying, but you can make out the sounds of someone crying. #Kill/Home
 -> Options 
 
 = Options 

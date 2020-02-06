@@ -7,17 +7,6 @@ using System.Collections.Generic;
 using UnityEngine.Assertions;
 using TMPro;
 
-//Stores informations about various speakers in the story.
-[CreateAssetMenu(menuName = "Speaker Options")]
-public class DiagloueConfig : ScriptableObject
-{
-    public string speaker_name;
-    public float time_between_sentences;
-    public float time_between_characters;
-    public Color32 speaker_color;
-    //Sounds while playing?
-}
-
 public class TextManager : MonoBehaviour
 {
     public static event Action<Story> OnCreateStory;
@@ -42,8 +31,8 @@ public class TextManager : MonoBehaviour
     private GameObject textArea;
     private VerticalLayoutGroup textAreaVertical;
 
-    public List<DiagloueConfig> speakers; //My favorite hack/workaround to not having Odin :(
-    private Dictionary<string, DiagloueConfig> speakersDic;
+    public List<DialogueConfig> speakers; //My favorite hack/workaround to not having Odin :(
+    private Dictionary<string, DialogueConfig> speakersDic;
 
     //For skipping through text if the user clicks early. 
     private bool mouseKeyPressed = false;
@@ -54,7 +43,7 @@ public class TextManager : MonoBehaviour
     {
         textArea = canvas.transform.GetChild(0).gameObject;
         textAreaVertical = textArea.GetComponent<VerticalLayoutGroup>();
-        speakersDic = new Dictionary<string, DiagloueConfig>();
+        speakersDic = new Dictionary<string, DialogueConfig>();
 
         for (int i = 0; i < speakers.Count; i++)
         {
@@ -90,7 +79,7 @@ public class TextManager : MonoBehaviour
         storyText.maxVisibleCharacters = 0;
 
         Assert.IsTrue(speakersDic.ContainsKey(speakerName));
-        DiagloueConfig speaker = speakersDic[speakerName];
+        DialogueConfig speaker = speakersDic[speakerName];
         string addColor = TagsUtility.AddColorTag(text, speaker.speaker_color);
         storyText.text += addColor;
         storyText.fontSize = textSize;
@@ -118,7 +107,7 @@ public class TextManager : MonoBehaviour
         blank.transform.SetParent(textArea.transform, false);
         blank.text = " ";
 
-        DiagloueConfig choices = speakersDic["Choice"];
+        DialogueConfig choices = speakersDic["Choice"];
 
         for (int i = 0; i < story.currentChoices.Count; i++)
         {

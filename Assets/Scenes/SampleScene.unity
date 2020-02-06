@@ -291,6 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundsList:
   - {fileID: 11400000, guid: 21afca9d16ff42648b26e51c81a94dc3, type: 2}
+  - {fileID: 11400000, guid: c3f83566563d119438715676e804d6cb, type: 2}
   sourcePrefab: {fileID: 7251890060152004035, guid: b8c258615b834b34c8473de02dcc6996,
     type: 3}
   soundParent: {fileID: 2021363904}

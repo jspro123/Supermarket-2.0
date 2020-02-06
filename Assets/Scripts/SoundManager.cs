@@ -2,25 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Sound Options")]
-public class SoundInfo : ScriptableObject
-{
-    public string sound_name;
-    public AudioClip sound;
-    [Tooltip("How many seconds to fade out over. Set to 0 to suddenly cut. Non-negative. ")]
-    public float fade_out;
-    [Tooltip("If true, will play until the sound effect is finished playing.")]
-    public bool playTillFinished;
-    [Tooltip("If true, will only cut when requested. Otherwise, cuts on the next 'page' of text. ")]
-    public bool cutAtTrigger;
-    [Tooltip("If true, will loop the sound effect. ")]
-    public bool loop;
-
-    //Fade in?
-    //Force kill? (If a player goes through the text too quickly)
-}
-
 public class SoundManager : MonoBehaviour
 {
     [SerializeField]
@@ -43,12 +24,10 @@ public class SoundManager : MonoBehaviour
         //soundsList.Clear();
     }
 
-    IEnumerator FadeOutClip(string name)
+    IEnumerator FadeOutClip(AudioSource source, SoundInfo clip)
     {
-        //Both guaranteed to exist
-        SoundInfo clip = soundsDict[name];
-        AudioSource source = soundsPlaying[name];
         float startVolume = source.volume;
+        source.volume = (clip.fade_out == 0) ? 0 : source.volume;
 
         while (source.volume > 0)
         {
@@ -56,15 +35,14 @@ public class SoundManager : MonoBehaviour
             yield return null;
         }
 
-        source.Stop();
-        if(source != null) { Destroy(source); }
-        soundsPlaying.Remove(name);
+        if(source != null) { source.Stop(); Destroy(source.gameObject); }
         yield break;
     }
 
     private void KillSound(string name)
     {
         SoundInfo clip;
+        AudioSource source;
         if (soundsDict.ContainsKey(name))
         {
             clip = soundsDict[name];
@@ -83,12 +61,9 @@ public class SoundManager : MonoBehaviour
                 return;
             }
 
-            if(clip.fade_out == 0) {
-                soundsPlaying[name].Stop();
-                if (soundsPlaying[name] != null) { Destroy(soundsPlaying[name]); }
-                soundsPlaying.Remove(name);
-            }
-            else { StartCoroutine(FadeOutClip(name)); }
+            source = soundsPlaying[name];
+            soundsPlaying.Remove(name);
+            StartCoroutine(FadeOutClip(source, clip));
         }
     }
 
@@ -100,7 +75,7 @@ public class SoundManager : MonoBehaviour
             clip = soundsDict[name];
         } else
         {
-            Debug.Log("Trying to play something that doesn't exits.");
+            Debug.Log("Trying to play something that doesn't exist: " + name);
             return;
         }
 
@@ -145,9 +120,7 @@ public class SoundManager : MonoBehaviour
         {
             if (!entry.Value.isPlaying)
             {
-                entry.Value.Stop();
-                if (entry.Value != null) { Destroy(entry.Value); }
-                soundsPlaying[entry.Key] = null;
+                KillSound(entry.Key);
             }
         }
     }
